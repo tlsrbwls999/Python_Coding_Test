@@ -1,0 +1,25 @@
+n=int(input())
+
+def dfs(depth,word,visited):
+    tar=''
+    if depth==len(word):
+        for t in temp:
+            print(t,end='')
+        print()
+        return
+    for i in range(len(word)):
+        if visited[i]==0 and word[i]!=tar:
+            temp.append(word[i])
+            visited[i]=1
+            dfs(depth+1,word,visited)
+            visited[i]=0
+            tar=temp.pop()
+
+for _ in range(n):
+    word=list(input())
+    word.sort()
+    visited=[0 for _ in range(len(word))]
+    temp=[]
+    dfs(0,word,visited)
+    
+    
