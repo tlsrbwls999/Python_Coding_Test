@@ -13,7 +13,7 @@
 ***❗️❗️꼭 문제를 순서대로 안풀어도 됩니다.❗️❗️***
 
 [백준 문제집](https://www.acmicpc.net/workbook/view/7135)
-|          순번          |        추천 문제         |        문제 번호         |        문제 이름         |         난이도          |        풀이 링크         | 해결  |
+|          순번          |        추천 문제         |        문제 번호         |        문제 이름         |         난이도          |        풀이 링크         | 해결 완료  |
 | :-----: | :-----: | :-----: | :-----: | :-----: | :-----: |:-----: |
 | 00 |  :heavy_check_mark:  | <a href="https://www.acmicpc.net/problem/15649" target="_blank">15649</a> | <a href="https://www.acmicpc.net/problem/15649" target="_blank">N과 M (1)</a> | <img height="25px" width="25px" src="https://static.solved.ac/tier_small/8.svg"/> | <a href="./../solution/backtracking/15649">바로가기</a> |
 | 01 |  :heavy_check_mark:  | <a href="https://www.acmicpc.net/problem/15650" target="_blank">15650</a> | <a href="https://www.acmicpc.net/problem/15650" target="_blank">N과 M (2)</a> | <img height="25px" width="25px" src="https://static.solved.ac/tier_small/8.svg"/> | <a href="./../solution/backtracking/15650">바로가기</a> |
