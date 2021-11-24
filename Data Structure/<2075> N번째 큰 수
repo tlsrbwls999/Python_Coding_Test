@@ -1,0 +1,16 @@
+import heapq
+n=int(input())
+
+heap=[]
+for _ in range(n):
+    board=list(map(int,input().split()))
+    
+    if not heap:
+        for num in board:
+            heapq.heappush(heap,num)
+    else:
+        for num in board:
+            if num>heap[0]:
+                heapq.heappush(heap,num)
+                heapq.heappop(heap)
+print(heap[0])
