@@ -1,0 +1,67 @@
+import sys,copy
+input=sys.stdin.readline
+r,c=map(int,input().split())
+
+board=[]
+
+for _ in range(r):
+    board.append(list(input()))
+
+direction=input()
+dir=[(0,0),(1,-1),(1,0),(1,1),(0,-1),(0,0),(0,1),(-1,-1),(-1,0),(-1,1)]
+
+crazy=[]
+x,y=0,0 #종수 위치
+
+for i in range(r):
+    for j in range(c):
+        if board[i][j]=='I':
+            x,y=i,j
+        elif board[i][j]=='R':
+            crazy.append((i,j))
+
+cnt=1
+
+for i in direction:
+    if i=='\n':
+        break
+    a,b=dir[int(i)][0],dir[int(i)][1]
+    board[x][y]='.'
+    x+=a
+    y+=b
+    board[x][y]='I'
+    check=len(crazy)
+    temp=0
+    pos=[]
+    real=copy.deepcopy(crazy)
+    crazy=[]
+    while real:
+        cx,cy=real.pop(0)
+        if board[cx][cy]=='.':
+            continue
+        tx,ty=0,0
+        min_num=1000
+        for d in range(1,10):
+            dx,dy=dir[d][0],dir[d][1]
+            if min_num>abs(x-(cx+dx))+abs(y-(cy+dy)) and 0<=cx+dx<r and 0<=cy+dy<c:
+                min_num=abs(x-(cx+dx))+abs(y-(cy+dy))
+                tx,ty=cx+dx,cy+dy
+        if board[tx][ty]=='.':
+            board[cx][cy]='.'
+            board[tx][ty]='R'
+            crazy.append((tx,ty))
+        elif board[tx][ty]=='I':
+            print("kraj "+str(cnt))
+            sys.exit(0)
+        elif board[tx][ty]=='R':
+            board[cx][cy]='.'
+            pos.append((tx,ty))
+        temp+=1   
+    for a,b in set(pos):
+        board[a][b]='.'
+    cnt+=1
+    
+for k in range(r):
+    for l in range(r):
+        print(board[k][l],end='')
+    print()
