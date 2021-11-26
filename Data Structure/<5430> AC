@@ -1,0 +1,37 @@
+from collections import deque
+import sys
+input=sys.stdin.readline
+t=int(input())
+
+for _ in range(t):
+    func=list(input())
+    n=int(input())
+    arr=input().rstrip()[1:-1].split(",")
+    queue = deque(arr)
+    
+    cnt=0
+    flag=True
+    if n==0:
+        queue=[]
+    for f in func:
+        if f=='D':
+            if queue:
+                if cnt%2==0:
+                    queue.popleft()
+                else:
+                    queue.pop()
+            else:
+                print('error')
+                flag=False
+                break
+        elif f=='R':
+            cnt+=1
+    
+    if flag:
+        if cnt%2==0:
+            print('['+','.join(queue)+']')
+        else:
+            queue.reverse()
+            print('['+','.join(queue)+']')
+#단순 구현처럼 뒤집는 반복을 계속했더니 시간초과 발생
+#아이디어를 잘 떠올리자
