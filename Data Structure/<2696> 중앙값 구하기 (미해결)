@@ -1,0 +1,59 @@
+import heapq,sys
+input=sys.stdin.readline
+t=int(input())
+
+for _ in range(t):
+    n=int(input())
+    num=[]
+    result=[]
+    for _ in range(n//10+1):
+        num.append(list(map(int,input().split())))
+    cnt=1
+    max_heap,min_heap=[],[]
+    for i in range(n//10+1):
+        for j in range(len(num[i])):
+            if cnt%2==0:
+                if not min_heap:
+                    if max_heap[0]>=num[i][j]:
+                        heapq.heappush(min_heap,-num[i][j])
+                    else:
+                        c=heapq.heappop(max_heap)
+                        heapq.heappush(min_heap,-c)
+                        heapq.heappush(max_heap,num[i][j])             
+                if len(max_heap)>len(min_heap):
+                    if max_heap[0]<num[i][j]:
+                        a=heapq.heappop(max_heap)
+                        heapq.heappush(max_heap,num[i][j])
+                        heapq.heappush(min_heap,-a)
+                    else:
+                        heapq.heappush(min_heap,-num[i][j])
+                elif len(max_heap)<len(min_heap):
+                    if num[i][j]>-(min_heap[0]):
+                        heapq.heappush(max_heap,num[i][j])
+                    else:
+                        b=heapq.heappop(min_heap)
+                        heapq.heappush(max_heap,-b)
+                        heapq.heappush(min_heap,-num[i][j]) 
+            else:
+                if not max_heap or not min_heap:
+                    heapq.heappush(max_heap,num[i][j])
+                    result.append(max_heap[0])
+                else:
+                    if max_heap[0]>num[i][j]:
+                        heapq.heappush(min_heap,-num[i][j])
+                        result.append(-min_heap[0])
+                    elif -(min_heap[0])<=num[i][j]:
+                        heapq.heappush(max_heap,num[i][j])
+                        result.append(max_heap[0])
+            cnt+=1
+    
+    if n//10>0:
+        for i in range(len(result)):
+            if i%10==0 and i>0:
+                print()
+            print(result[i],end=' ')          
+    else:
+        print(*result)
+        
+------------------------------------------
+첫번째 풀이, 힙 두개를 넣고 길이 유지해주면서 찾는 방식, 50%에서 답이 틀림...ㅠㅠ
