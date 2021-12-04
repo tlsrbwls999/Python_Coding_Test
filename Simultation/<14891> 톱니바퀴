@@ -1,0 +1,53 @@
+from collections import deque
+
+q=deque()
+for _ in range(4):
+    a=deque(input())
+    q.append(a)
+
+n=int(input())
+
+def check(q):
+    total=0
+    if q[0][0]=='1':
+        total+=1
+    if q[1][0]=='1':
+        total+=2
+    if q[2][0]=='1':
+        total+=4
+    if q[3][0]=='1':
+        total+=8
+    return total
+
+def direction(x,y):
+    d=[-1,1]
+    pos=[(x-1,y)]
+    temp=[(x-1,y)]
+    visited=[False,False,False,False]
+    visited[x-1]=True
+    while temp:
+        a,b=temp.pop(0)
+        for i in d:
+            nx=a+i
+            if 0<=nx<4 and i==-1 and visited[nx]==False:
+                if q[nx][2]!=q[a][6]:
+                    visited[nx]=True
+                    pos.append((nx,-b))
+                    temp.append((nx,-b))
+            if 0<=nx<4 and i==1 and visited[nx]==False:
+                if q[nx][6]!=q[a][2]:
+                    visited[nx]=True
+                    pos.append((nx,-b))
+                    temp.append((nx,-b))
+    return pos
+                
+
+for _ in range(n):
+    num,dir=map(int,input().split())
+    result=direction(num,dir)
+    for x,y in result:
+        if y==1:
+            q[x].rotate(1)
+        elif y==-1:
+            q[x].rotate(-1)
+print(check(q))
