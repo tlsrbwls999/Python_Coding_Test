@@ -9,14 +9,8 @@ n=int(input())
 
 def check(q):
     total=0
-    if q[0][0]=='1':
-        total+=1
-    if q[1][0]=='1':
-        total+=2
-    if q[2][0]=='1':
-        total+=4
-    if q[3][0]=='1':
-        total+=8
+    for i in range(4):
+        total+=(2**i)*int(q[i][0])
     return total
 
 def direction(x,y):
