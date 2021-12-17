@@ -1,0 +1,16 @@
+from itertools import combinations
+
+word=input()
+
+temp=list(combinations([i for i in range(len(word))],3))
+
+result=[]
+for a,b,c in temp:
+    x=word[0:b]
+    y=word[b:c]
+    z=word[c:len(word)+1]
+    word_r=x[::-1]+y[::-1]+z[::-1]
+    result.append(word_r)
+
+result.sort()
+print(result[0])
