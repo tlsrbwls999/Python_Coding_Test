@@ -1,0 +1,30 @@
+import sys 
+input=sys.stdin.readline
+n=int(input())
+
+word=[]
+dict={}
+num=[]
+
+for _ in range(n):
+    word.append(input().rstrip())
+
+for i in range(n):
+    for j in range(len(word[i])):
+        if word[i][j] in dict:
+            dict[word[i][j]]+=10**(len(word[i])-j-1)
+        else:
+            dict[word[i][j]]=10**(len(word[i])-j-1)
+
+for val in dict.values():
+    num.append(val)
+
+num.sort(reverse=True)
+
+result=0
+pow=9
+
+for x in num:
+    result+=x*pow
+    pow-=1
+print(result)
