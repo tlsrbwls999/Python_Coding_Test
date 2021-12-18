@@ -1,0 +1,42 @@
+import copy
+n,b=map(int,input().split())
+
+matrix=[]
+
+for _ in range(n):
+    matrix.append(list(map(int,input().split())))
+
+
+def num(A,B):
+    if B==1:
+        for i in range(n):
+            for j in range(n):
+                A[i][j]%=1000
+        return A
+    elif B%2==1:
+        tmp=[[0 for _ in range(n)] for _ in range(n)]
+        C=num(A,B-1)
+        for i in range(n):
+            for j in range(n):
+                for k in range(n):
+                    tmp[i][j]+=C[i][k]*A[k][j]
+                tmp[i][j]%=1000
+        return tmp
+    else:
+        tmp=[[0 for _ in range(n)] for _ in range(n)]
+        C=num(A,B//2)
+        for i in range(n):
+            for j in range(n):
+                for k in range(n):
+                    tmp[i][j]+=C[i][k]*C[k][j]
+                tmp[i][j]%=1000
+        return tmp
+
+result=num(matrix,b)
+
+for i in result:
+    for j in i:
+        print(j,end=' ')
+    print()
+    
+##시간복잡도 해결을 위한 분할 정복이라고 할 수 있다!
