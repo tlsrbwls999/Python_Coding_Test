@@ -1,0 +1,53 @@
+from collections import deque
+import copy,sys
+n,m=map(int,input().split())
+
+board=[]
+
+for _ in range(n):
+    board.append(list(input()))
+
+pos=deque()
+fire=deque()
+
+for i in range(n):
+    for j in range(m):
+        if board[i][j]=='J':
+            pos.append((i,j))
+        elif board[i][j]=='F':
+            fire.append((i,j))
+
+dir=[(-1,0),(1,0),(0,1),(0,-1)]
+
+flag=False
+cnt=0
+
+while True:
+    cnt+=1
+    f_temp=copy.deepcopy(fire)
+    while f_temp:
+        fx,fy=f_temp.popleft()
+        fire.popleft()
+        for a,b in dir:
+            fa,fb=fx+a,fy+b
+            if 0<=fa<n and 0<=fb<m and board[fa][fb]!='#' and board[fa][fb]!='F':
+                board[fa][fb]='F'
+                fire.append((fa,fb))      
+    p_temp=copy.deepcopy(pos)
+    if not p_temp:
+        break
+    while p_temp:
+        px,py=p_temp.popleft()
+        board[px][py]='@'
+        pos.popleft()
+        for a,b in dir:
+            pa,pb=px+a,py+b
+            if pa<0 or pb<0 or pa>=n or pb>=m:
+                print(cnt)
+                sys.exit(0)
+            if 0<=pa<n and 0<=pb<m and board[pa][pb]=='.':
+                board[pa][pb]='J'
+                pos.append((pa,pb))
+          
+if not flag:
+    print('IMPOSSIBLE')
