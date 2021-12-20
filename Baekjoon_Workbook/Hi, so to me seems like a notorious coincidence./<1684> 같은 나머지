@@ -1,0 +1,17 @@
+import math
+n=int(input())
+
+num=list(map(int,input().split()))
+
+
+temp=[]
+for i in range(n-1):
+    temp.append(abs(num[i]-num[i+1]))
+
+temp.sort()
+
+result=math.gcd(temp[0],temp[1])
+for j in range(2,len(temp)):
+    result=math.gcd(result,temp[j])
+
+print(result)
